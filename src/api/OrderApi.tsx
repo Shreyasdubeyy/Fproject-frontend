@@ -5,35 +5,44 @@ import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
- export const useGetMyOrders = () => {
-   const { getAccessTokenSilently } = useAuth0();
+export const useGetMyOrders = () => {
+  const { getAccessTokenSilently } = useAuth0();
 
-   const getMyOrdersRequest = async (): Promise<Order[]> => {
-     const accessToken = await getAccessTokenSilently();
+  const getMyOrdersRequest = async (): Promise<Order[]> => {
+    const accessToken = await getAccessTokenSilently();
 
-     const response = await fetch(`${API_BASE_URL}/api/order`, {
-       headers: {
-         Authorization: `Bearer ${accessToken}`,
-       },
-     });
+    const response = await fetch(`${API_BASE_URL}/api/order`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
-     if (!response.ok) {
-       throw new Error("Failed to get orders");
-     }
+    if (!response.ok) {
+      throw new Error("Failed to get orders");
+    }
 
-     return response.json();
-   };
+    const orders: Order[] = await response.json();
 
-   const { data: orders, isLoading } = useQuery(
-     "fetchMyOrders",
-     getMyOrdersRequest,
-     {
-       refetchInterval: 5000,
-     }
-   );
+    // Handle cases where order.restaurant is null
+    const ordersWithRestaurant = orders.map(order => ({
+      ...order,
+      restaurant: order.restaurant || { imageUrl: "" }, // Provide a default restaurant object if null
+    }));
 
-   return { orders, isLoading };
- };
+    return ordersWithRestaurant;
+  };
+
+  const { data: orders, isLoading } = useQuery(
+    "fetchMyOrders",
+    getMyOrdersRequest,
+    {
+      refetchInterval: 5000,
+    }
+  );
+
+  return { orders, isLoading };
+};
+
 
 type CheckoutSessionRequest = {
   cartItems: {
