@@ -10,17 +10,17 @@ const MobileNav = () => {
   return(
     <Sheet>
         <SheetTrigger>
-            <Menu className="text-orange-500"/>
+            <Menu className="text-amber-500"/>
         </SheetTrigger>
         <SheetContent className="space-y-3" >
             <SheetTitle>
                   {isAuthenticated ? (
                     <span className="flex items-center font-bold gap-2">
-                        <CircleUserRound className="text-orange-500" />
+                        <CircleUserRound className="text-amber-500" />
                         {user?.email}
                     </span> 
                     ) : (
-                        <span>Welcome to HungryBirds</span>
+                        <span>Welcome to SnappyMeals</span>
                     )}
             </SheetTitle>
             <Separator/>
@@ -28,7 +28,7 @@ const MobileNav = () => {
                     {isAuthenticated ? (
                     <MobileNavLinks />
                      ) : (
-                     <Button className="flex-1 font-bold bg-blue-500"
+                     <Button className="flex-1 font-bold bg-amber-500"
                         onClick={async () => await loginWithRedirect()}
                     >Log in</Button>
                     )}

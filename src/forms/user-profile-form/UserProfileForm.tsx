@@ -126,7 +126,7 @@ useEffect(() => {
             {isLoading ? <LoadingButton /> : 
             <Button 
             type="submit" 
-            className="bg-orange-500">
+            className="bg-amber-500">
                 {buttonText}
                 </Button>}
 
