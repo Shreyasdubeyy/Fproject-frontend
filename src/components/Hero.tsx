@@ -1,4 +1,4 @@
-import hero from "../assets/hero.png"
+
 import snappy from "../assets/Snappy.png"
 const Hero = () => {
   return(
