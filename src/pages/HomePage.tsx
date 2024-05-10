@@ -2,7 +2,7 @@ import landingImage from "../assets/landing.png"
 //import appDownloadImage from "../assets/appDownload.png"
 import SearchBar, { SearchForm } from "@/components/SearchBar";
 import { Link, useNavigate } from "react-router-dom";
-import appimage from "../assets/App-Store-Logo-PNG-HD-Image.png"
+import appimage from "../assets/App-Store-Logo1-PNG-HD-Image.png"
 
 const HomePage = () => {
 
